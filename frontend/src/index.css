@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Color tokens for Light and Dark Modes */
+    --brand-primary-light: #6366f1; /* Indigo 500 */
+    --brand-primary-dark: #818cf8;  /* Indigo 400 */
+    
+    --brand-success-light: #10b981; /* Emerald 500 */
+    --brand-success-dark: #34d399;  /* Emerald 400 */
+
+    --brand-warning-light: #f59e0b; /* Amber 500 */
+    --brand-warning-dark: #fbbf24;  /* Amber 400 */
+
+    --brand-danger-light: #ef4444;  /* Red 500 */
+    --brand-danger-dark: #f87171;   /* Red 400 */
+
+    --bg-base-light: #f8fafc;        /* Slate 50 */
+    --bg-base-dark: #090d16;         /* Custom deep dark blue-black */
+
+    --bg-card-light: rgba(255, 255, 255, 0.75);
+    --bg-card-dark: rgba(17, 24, 39, 0.65);
+
+    --border-light: rgba(226, 232, 240, 0.8);
+    --border-dark: rgba(31, 41, 55, 0.6);
+
+    --text-main-light: #0f172a;      /* Slate 900 */
+    --text-main-dark: #f8fafc;       /* Slate 50 */
+
+    --text-muted-light: #64748b;     /* Slate 500 */
+    --text-muted-dark: #94a3b8;      /* Slate 400 */
+
+    --scrollbar-thumb-light: #cbd5e1;
+    --scrollbar-thumb-dark: #374151;
+    --scrollbar-track-light: #f1f5f9;
+    --scrollbar-track-dark: #111827;
+
+    /* Resolved properties using light-dark() where supported */
+    --color-primary: var(--brand-primary-light);
+    --color-success: var(--brand-success-light);
+    --color-warning: var(--brand-warning-light);
+    --color-danger: var(--brand-danger-light);
+    --color-bg-base: var(--bg-base-light);
+    --color-bg-card: var(--bg-card-light);
+    --color-border: var(--border-light);
+    --color-text-main: var(--text-main-light);
+    --color-text-muted: var(--text-muted-light);
+    --scrollbar-thumb: var(--scrollbar-thumb-light);
+    --scrollbar-track: var(--scrollbar-track-light);
+
+    color-scheme: light dark;
+  }
+
+  /* When system or class preferences are dark mode */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-primary: var(--brand-primary-dark);
+      --color-success: var(--brand-success-dark);
+      --color-warning: var(--brand-warning-dark);
+      --color-danger: var(--brand-danger-dark);
+      --color-bg-base: var(--bg-base-dark);
+      --color-bg-card: var(--bg-card-dark);
+      --color-border: var(--border-dark);
+      --color-text-main: var(--text-main-dark);
+      --color-text-muted: var(--text-muted-dark);
+      --scrollbar-thumb: var(--scrollbar-thumb-dark);
+      --scrollbar-track: var(--scrollbar-track-dark);
+    }
+  }
+
+  /* Manual HTML theme overrides */
+  html[data-theme="light"] {
+    --color-primary: var(--brand-primary-light);
+    --color-success: var(--brand-success-light);
+    --color-warning: var(--brand-warning-light);
+    --color-danger: var(--brand-danger-light);
+    --color-bg-base: var(--bg-base-light);
+    --color-bg-card: var(--bg-card-light);
+    --color-border: var(--border-light);
+    --color-text-main: var(--text-main-light);
+    --color-text-muted: var(--text-muted-light);
+    --scrollbar-thumb: var(--scrollbar-thumb-light);
+    --scrollbar-track: var(--scrollbar-track-light);
+    color-scheme: light;
+  }
+
+  html[data-theme="dark"] {
+    --color-primary: var(--brand-primary-dark);
+    --color-success: var(--brand-success-dark);
+    --color-warning: var(--brand-warning-dark);
+    --color-danger: var(--brand-danger-dark);
+    --color-bg-base: var(--bg-base-dark);
+    --color-bg-card: var(--bg-card-dark);
+    --color-border: var(--border-dark);
+    --color-text-main: var(--text-main-dark);
+    --color-text-muted: var(--text-muted-dark);
+    --scrollbar-thumb: var(--scrollbar-thumb-dark);
+    --scrollbar-track: var(--scrollbar-track-dark);
+    color-scheme: dark;
+  }
+
+  @supports (color: light-dark(white, black)) {
+    :root {
+      --color-primary: light-dark(var(--brand-primary-light), var(--brand-primary-dark));
+      --color-success: light-dark(var(--brand-success-light), var(--brand-success-dark));
+      --color-warning: light-dark(var(--brand-warning-light), var(--brand-warning-dark));
+      --color-danger: light-dark(var(--brand-danger-light), var(--brand-danger-dark));
+      --color-bg-base: light-dark(var(--bg-base-light), var(--bg-base-dark));
+      --color-bg-card: light-dark(var(--bg-card-light), var(--bg-card-dark));
+      --color-border: light-dark(var(--border-light), var(--border-dark));
+      --color-text-main: light-dark(var(--text-main-light), var(--text-main-dark));
+      --color-text-muted: light-dark(var(--text-muted-light), var(--text-muted-dark));
+      --scrollbar-thumb: light-dark(var(--scrollbar-thumb-light), var(--scrollbar-thumb-dark));
+      --scrollbar-track: light-dark(var(--scrollbar-track-light), var(--scrollbar-track-dark));
+    }
+  }
+
+  * {
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    scrollbar-width: thin;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  body {
+    background-color: var(--color-bg-base);
+    color: var(--color-text-main);
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+@theme {
+  --color-primary: var(--color-primary);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+  --color-text-main: var(--color-text-main);
+  --color-text-muted: var(--color-text-muted);
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--color-bg-card);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+}
+
+.glass-modal {
+  background: var(--color-bg-card);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Shimmer Loading Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+html[data-theme="light"] .shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.03) 25%,
+    rgba(0, 0, 0, 0.08) 50%,
+    rgba(0, 0, 0, 0.03) 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* Scrollbar legacy webkit fallback */
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+}
